@@ -1,0 +1,75 @@
+name: 'Compliance Gate'
+description: 'Run compliance policies against your infrastructure code'
+author: 'Compliance Platform Team'
+
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  policy-path:
+    description: 'Path to policy files directory'
+    required: false
+    default: 'policies'
+  
+  scan-path:
+    description: 'Path to scan for compliance violations'
+    required: false
+    default: '.'
+  
+  format:
+    description: 'Output format (json, table, sarif)'
+    required: false
+    default: 'table'
+  
+  severity-threshold:
+    description: 'Minimum severity to fail the build (critical, high, medium, low)'
+    required: false
+    default: 'medium'
+  
+  config-file:
+    description: 'Path to configuration file'
+    required: false
+    default: ''
+  
+  exclude:
+    description: 'Comma-separated list of paths to exclude'
+    required: false
+    default: ''
+
+outputs:
+  violations-count:
+    description: 'Total number of violations found'
+  
+  critical-count:
+    description: 'Number of critical violations'
+  
+  high-count:
+    description: 'Number of high severity violations'
+  
+  medium-count:
+    description: 'Number of medium severity violations'
+  
+  low-count:
+    description: 'Number of low severity violations'
+  
+  compliant:
+    description: 'Whether the scan passed compliance checks'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - scan
+    - --policy-path
+    - ${{ inputs.policy-path }}
+    - --scan-path
+    - ${{ inputs.scan-path }}
+    - --format
+    - ${{ inputs.format }}
+    - --severity-threshold
+    - ${{ inputs.severity-threshold }}
+    - --config-file
+    - ${{ inputs.config-file }}
+    - --exclude
+    - ${{ inputs.exclude }}

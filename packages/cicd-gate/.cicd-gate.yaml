@@ -1,0 +1,9 @@
+# cicd-gate configuration
+policy_path: "./policies"
+severity:
+  critical: "deny"
+  high: "deny"
+  medium: "warn"
+  low: "info"
+output: "stdout"
+socratic: false
