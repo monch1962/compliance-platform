@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    # Violation: latest tag
+    image: nginx:latest
+    ports:
+      - "80:80"
+  db:
+    # Violation: no tag at all
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret123

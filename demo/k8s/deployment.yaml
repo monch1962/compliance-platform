@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nginx
+          # Violation: latest tag
+          image: nginx:latest
+          # Violation: no resource limits or requests
+          ports:
+            - containerPort: 80
+          securityContext:
+            # Violation: privileged
+            privileged: true
+            # Violation: allowPrivilegeEscalation
+            allowPrivilegeEscalation: true
+      # Violation: hostNetwork
+      hostNetwork: true
