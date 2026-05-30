@@ -72,11 +72,30 @@ kind: Deployment
 metadata:
   name: good-deploy
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
   template:
+    metadata:
+      labels:
+        app: web
     spec:
+      serviceAccountName: web-app-sa
+      automountServiceAccountToken: false
+      nodeSelector:
+        workload: general
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: web
           image: nginx@sha256:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
           resources:
             limits:
               cpu: "500m"
@@ -86,6 +105,22 @@ spec:
               memory: "256Mi"
           securityContext:
             privileged: false
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8080
 """)
 
     # Docker violations fixture
