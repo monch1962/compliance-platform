@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  # No pod-security.kubernetes.io/enforce label — should trigger E8-AC-001
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: legacy
+  labels:
+    pod-security.kubernetes.io/enforce: "privileged"
+    # "privileged" level is too permissive — should trigger E8-AC-002
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: untrusted-app
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: untrusted-app
+  template:
+    metadata:
+      labels:
+        app: untrusted-app
+    spec:
+      containers:
+        - name: app
+          image: some-random-registry.example.com/myapp:v1.0
+          # Unverified registry — should trigger E8-AC-003
+          ports:
+            - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-db
+  namespace: production
+  # No backup annotations — should trigger E8-BK-006
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: production
+  annotations:
+    backup.velero.io/schedule: "daily"
+    # Has backup annotations — should NOT trigger E8-BK-005
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.25
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: production
+  # No backup annotations — should trigger E8-BK-005
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: docker.io/myapp:1.0
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: api-data
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: daily-db-snapshot
+  namespace: production
+spec:
+  volumeSnapshotClassName: csi-hostpath-snapclass
+  source:
+    persistentVolumeClaimName: data
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-backup
+  namespace: velero
+spec:
+  schedule: "0 1 * * *"
+  template:
+    includedNamespaces:
+      - production
+    ttl: "720h"

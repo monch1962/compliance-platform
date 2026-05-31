@@ -109,12 +109,17 @@ jobs:
 
 | Policy | ID | Rules | Frameworks | Tier |
 |---|---|---|---|---|
-| K8s Security | K8S-SEC-* | 12 | ISM-1172, ISM-1408, ISM-0290, ISM-1403, ISM-1603, E8 | L1 |
-| K8s IAM | K8S-IAM-* | 9 | ISM-1172, ISM-0290, ISM-1403, E8 | L1-L2 |
-| K8s Network | K8S-NET-* | 4 | ISM-1603, ISM-1408, E8 | L1-L2 |
-| K8s Storage | K8S-STO-* | 3 | ISM-1172, ISM-0290, E8 | L1-L2 |
-| Docker | DKR-* | 3 | ISM-1603, ISM-1408, E8 | L1-L2 |
-| Secrets | SEC-* | 2 | ISM-1172 | L1 |
+| K8s Security | K8S-SEC-* | 12 | ISM-1172, ISM-1408, ISM-0290, ISM-1403, ISM-1603, E8 #2, #6 | L1 |
+| K8s IAM | K8S-IAM-* | 9 | ISM-1172, ISM-0290, ISM-1403, E8 #6 | L1-L2 |
+| K8s Network | K8S-NET-* | 5 | ISM-1603, ISM-1408, E8 #5 | L1-L2 |
+| K8s Storage | K8S-STO-* | 3 | ISM-1172, ISM-0290, E8 #6 | L1-L2 |
+| K8s App Control | E8-AC-* | 3 | ISM-1172, E8 #1 | L1 |
+| K8s Patch OS | E8-OS-* | 3 | ISM-1603, E8 #7 | L1-L2 |
+| K8s Backup | E8-BK-* | 6 | ISM-1403, E8 #8 | L2 |
+| Docker | DKR-* | 4 | ISM-1603, ISM-1408, E8 #2 | L1-L2 |
+| Secrets | SEC-* | 2 | ISM-1172, E8 #6 | L1 |
+
+**Total: 50 rules across 5 of 8 Essential Eight strategies (E8 #3, #4 require manual attestation)**
 
 ### Roadmap
 
