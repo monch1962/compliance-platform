@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/monch1962/compliance-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/monch1962/compliance-platform/actions/workflows/ci.yml)
 ![Go Version](https://img.shields.io/badge/Go-1.22-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue)
 
 **CI/CD Gate** checks your infrastructure-as-code against **Australian Essential Eight (E8) and ISM** compliance policies — directly from your CI pipeline.
 
@@ -152,4 +152,6 @@ cd packages/cicd-gate && go build -o cicd-gate ./...
 
 ## License
 
-MIT — Use at your own risk. This tool is not a substitute for a formal compliance audit.
+Apache 2.0 — Use at your own risk. This tool is not a substitute for a formal compliance audit.
+
+See [LICENSE](LICENSE) for full terms.
