@@ -1,0 +1,2 @@
+[console_scripts]
+cicd-gate = cicd_gate.__main__:main

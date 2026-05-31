@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: cicd-gate
+Version: 0.3.3
+Summary: CI/CD compliance gate for Australian ISM and Essential Eight standards
+Author-email: David Monch <monch1962@gmail.com>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/monch1962/compliance-platform
+Project-URL: Source, https://github.com/monch1962/compliance-platform
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Quality Assurance
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# cicd-gate
+
+CI/CD compliance gate that checks your Kubernetes and Docker infrastructure against **Australian ISM and Essential Eight** standards.
+
+## Quick Start
+
+```bash
+pip install cicd-gate
+cicd-gate scan . --socratic
+```
+
+Requires [conftest](https://github.com/open-policy-agent/conftest) to be installed.
+
+## GitHub Action
+
+```yaml
+- uses: monch1962/compliance-platform@v0.3.1
+```
+
+[GitHub](https://github.com/monch1962/compliance-platform)
