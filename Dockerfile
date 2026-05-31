@@ -1,5 +1,5 @@
 # Multi-stage build for compliance-gate GitHub Action
-FROM golang:1.21-alpine@sha256:96634e55b363cb93d39f78fb18aa64abc7f96d372c176660d7b8b6118939d65b AS builder
+FROM golang:1.21-alpine AS builder
 
 # Install dependencies
 RUN apk add --no-cache git ca-certificates
@@ -27,7 +27,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
 COPY packages/policies/ /app/policies/
 
 # Final stage: distroless runtime
-FROM gcr.io/distroless/static@sha256:41972110a1c1a5c0b6adb283e8aa092c43c31f7c5d79b8656fbffff2c3e61f05
+FROM gcr.io/distroless/static
 
 # Copy the binary
 COPY --from=builder /app/compliance-gate /usr/local/bin/compliance-gate
