@@ -1,5 +1,6 @@
 /cicd-gate
 /cicd-gate.exe
+packages/cicd-gate/cicd-gate
 *.tfstate
 *.tfstate.backup
 .env

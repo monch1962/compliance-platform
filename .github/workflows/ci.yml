@@ -42,7 +42,7 @@ jobs:
           curl -sL https://openpolicyagent.org/downloads/latest/opa_linux_amd64 -o /usr/local/bin/opa
           chmod +x /usr/local/bin/opa
       - name: Run OPA tests
-        run: opa test packages/policies/... -v
+        run: opa test packages/policies/ -v
 
   build:
     name: Build

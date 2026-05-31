@@ -34,7 +34,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is .cicd-gate.yaml)")
 	
 	// Bind flags to viper
-	viper.BindPFlag("config", rootCmd.PersistentFlags().Lookup("config"))
+	_ = viper.BindPFlag("config", rootCmd.PersistentFlags().Lookup("config"))
 }
 
 // initConfig reads in config file and ENV variables if set.
