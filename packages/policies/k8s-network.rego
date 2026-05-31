@@ -1,5 +1,7 @@
 package main
 
+import rego.v1
+
 # === INGRESS TLS [ISM-1603] [E8: Multi-factor Authentication (ML1)] [Tier: L1] ===
 
 deny contains msg if {

@@ -1,5 +1,7 @@
 package main
 
+import rego.v1
+
 # === PRIVILEGE ESCALATION [ISM-1172] [E8: Restrict Administrative Privileges (ML2)] [Tier: L1] ===
 
 deny contains msg if {

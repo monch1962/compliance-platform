@@ -2,7 +2,7 @@
 FROM golang:1.21-alpine AS builder
 
 # Install dependencies
-RUN apk add --no-cache git ca-certificates
+RUN apk add --no-cache git ca-certificates curl
 
 # Set working directory
 WORKDIR /app
@@ -23,14 +23,21 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -o compliance-gate \
     ./main.go
 
+# Download conftest (the OPA policy engine that compliance-gate wraps)
+RUN curl -sL https://github.com/open-policy-agent/conftest/releases/download/v0.58.0/conftest_0.58.0_Linux_x86_64.tar.gz \
+    -o /tmp/conftest.tar.gz && \
+    tar xzf /tmp/conftest.tar.gz -C /usr/local/bin/ conftest && \
+    chmod +x /usr/local/bin/conftest
+
 # Copy policies
 COPY packages/policies/ /app/policies/
 
 # Final stage: distroless runtime
 FROM gcr.io/distroless/static
 
-# Copy the binary
+# Copy the binary and conftest
 COPY --from=builder /app/compliance-gate /usr/local/bin/compliance-gate
+COPY --from=builder /usr/local/bin/conftest /usr/local/bin/conftest
 
 # Copy policies
 COPY --from=builder /app/policies/ /etc/compliance-gate/policies/

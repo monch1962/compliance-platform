@@ -1,5 +1,7 @@
 package main
 
+import rego.v1
+
 # === LATEST TAG [ISM-1603] [E8: Patch Applications (ML2)] [Tier: L1] ===
 
 deny contains msg if {

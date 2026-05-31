@@ -1,5 +1,7 @@
 package main
 
+import rego.v1
+
 # === HOST PATH VOLUMES [ISM-1172] [Tier: L1] ===
 
 deny contains msg if {

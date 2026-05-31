@@ -1,5 +1,7 @@
 package main
 
+import rego.v1
+
 # Detect AWS access keys in resource attribute values [ISM-1172] [Tier: L1]
 deny contains msg if {
 	resource := input.resource[_]
