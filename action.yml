@@ -8,9 +8,9 @@ branding:
 
 inputs:
   policy-path:
-    description: 'Path to policy files directory'
+    description: 'Path to policy files directory (default: baked-in policies)'
     required: false
-    default: './policies'
+    default: '/etc/compliance-gate/policies'
   
   scan-path:
     description: 'Path to scan for compliance violations'

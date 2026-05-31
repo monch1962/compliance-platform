@@ -1,0 +1,41 @@
+name: Test Action
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-k8s-violations:
+    name: Test K8s violations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run compliance scan on K8s violations fixture
+        uses: ./
+        with:
+          scan-path: demo/k8s
+        continue-on-error: true
+
+  test-k8s-compliant:
+    name: Test K8s compliant
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run compliance scan on K8s compliant fixture
+        uses: ./
+        with:
+          scan-path: demo/k8s-compliant
+        continue-on-error: true
+
+  test-docker:
+    name: Test Docker violations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run compliance scan on Docker violations fixture
+        uses: ./
+        with:
+          scan-path: demo/docker
+        continue-on-error: true
