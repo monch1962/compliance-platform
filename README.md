@@ -39,22 +39,35 @@ It does NOT provide:
 
 **Tier L1** controls are machine-verified. **Tiers L2-L4** provide coverage monitoring and evidence collection — not certification.
 
-*Use at your own risk. Free and open-source software (MIT).*
+*Use at your own risk. Free and open-source software (Apache 2.0).*
 
 ---
+
+## Prerequisites
+
+- **conftest** — the CLI wraps [conftest](https://github.com/open-policy-agent/conftest) to evaluate OPA/Rego policies
+  ```bash
+  # macOS
+  brew install conftest
+
+  # Linux (via Linuxbrew)
+  brew install conftest
+
+  # Or download from https://github.com/open-policy-agent/conftest/releases
+  ```
+- **Go 1.21+** (only needed for `go install` method below)
 
 ## Quick Start
 
 ```bash
-# Install via Go
+# Install via Go (requires Go 1.21+)
 go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest
 
-# Or install via pip
+# Or install via pip (Python wrapper — downloads the Go binary)
 pip install cicd-gate
 
-# Or install via Homebrew
-brew tap monch1962/tap
-brew install cicd-gate
+# Verify it works
+cicd-gate version
 ```
 
 ## Usage
@@ -68,9 +81,6 @@ cicd-gate scan .
 
 # Scan with verbose remediation hints (framework IDs, tier labels, remediation)
 cicd-gate scan . --socratic
-
-# Scan against a specific compliance pack
-cicd-gate scan . --pack essential-eight
 
 # Scan a specific directory with custom policies
 cicd-gate scan ./infra --policy ./custom-policies
@@ -89,8 +99,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: monch1962/compliance-platform@v1
-        with:
-          policy-path: "./policies"
 ```
 
 ## Policies
@@ -141,13 +149,13 @@ Summary:
 cd packages/cicd-gate && go test ./...
 
 # Test policies
-opa test packages/policies/... -v
+opa test packages/policies/ -v
 
 # Scan demo fixtures
 conftest test demo/k8s/ --policy packages/policies/
 
 # Build
-cd packages/cicd-gate && go build -o cicd-gate ./...
+cd packages/cicd-gate && go build -o cicd-gate .
 ```
 
 ## License
