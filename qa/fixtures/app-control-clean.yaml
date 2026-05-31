@@ -1,34 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: good-ns
+  labels:
+    pod-security.kubernetes.io/enforce: "baseline"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: good-deploy
+  name: good-app
+  namespace: good-ns
   annotations:
     backup.velero.io/schedule: "daily"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
+      app: good
   template:
     metadata:
       labels:
-        app: web
+        app: good
     spec:
-      serviceAccountName: web-app-sa
+      serviceAccountName: app-sa
       automountServiceAccountToken: false
       nodeSelector:
         workload: general
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
-        seccompProfile:
-          type: RuntimeDefault
       containers:
-        - name: web
-          image: nginx:1.25
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
+        - name: app
+          image: docker.io/myapp:1.0
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           resources:
             limits:
               cpu: "500m"
@@ -36,16 +43,6 @@ spec:
             requests:
               cpu: "250m"
               memory: "256Mi"
-          securityContext:
-            privileged: false
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            runAsUser: 1001
-            capabilities:
-              drop:
-                - ALL
-              add:
-                - NET_BIND_SERVICE
           livenessProbe:
             httpGet:
               path: /healthz
@@ -54,3 +51,6 @@ spec:
             httpGet:
               path: /readyz
               port: 8080
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
