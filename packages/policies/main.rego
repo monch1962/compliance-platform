@@ -1,24 +1,41 @@
-package compliance
+package main
 
 import rego.v1
 
-import data.compliance.secrets
-import data.compliance.docker
-import data.compliance.k8s_security
+# Aggregate all deny rules across all policy files
+# Each policy file also declares package main, so denys merge automatically
+# This file provides compliance summary rules on top of the merged set
 
-# Aggregate all deny rules from imported policies (as a set)
-violations := secrets.deny | docker.deny | k8s_security.deny
-
-# Overall compliance check
+# Overall compliance check — passes when no violations exist
 compliant if {
-	count(violations) == 0
+	count(deny) == 0
 }
 
-# Count violations by severity
-violation_summary := {
-	"critical": count([v | v := violations[_]; v.severity == "critical"]),
-	"high": count([v | v := violations[_]; v.severity == "high"]),
-	"medium": count([v | v := violations[_]; v.severity == "medium"]),
-	"low": count([v | v := violations[_]; v.severity == "low"]),
-	"total": count(violations),
+# Count violations with framework IDs embedded in messages
+count_ism := count([msg | msg := deny[_]; contains(msg, "[ISM-")])
+
+count_e8 := count([msg | msg := deny[_]; contains(msg, "[E8:")])
+
+# Count by tier
+count_l1 := count([msg | msg := deny[_]; contains(msg, "[Tier: L1]")])
+
+count_l2 := count([msg | msg := deny[_]; contains(msg, "[Tier: L2]")])
+
+count_l3 := count([msg | msg := deny[_]; contains(msg, "[Tier: L3]")])
+
+count_l4 := count([msg | msg := deny[_]; contains(msg, "[Tier: L4]")])
+
+# Full violation summary
+summary := {
+	"total": count(deny),
+	"tiers": {
+		"L1": count_l1,
+		"L2": count_l2,
+		"L3": count_l3,
+		"L4": count_l4,
+	},
+	"frameworks": {
+		"ISM": count_ism,
+		"E8": count_e8,
+	},
 }

@@ -24,6 +24,17 @@ severity:
   low: "info"
 output: "stdout"
 socratic: false
+
+# Legal Disclaimer
+# =================
+# CI/CD Gate is a compliance POSTURE MONITOR, not a compliance certification.
+# L1 (Machine-Verified) controls are automated policy checks.
+# L2-L4 controls provide coverage monitoring and evidence collection.
+# This tool does NOT provide:
+#   - Formal compliance audits or certifications
+#   - Qualified IRAP assessor services
+#   - Legal advice on regulatory obligations
+# Use at your own risk. See LICENSE for terms.
 `
 
 		if _, err := os.Stat(".cicd-gate.yaml"); err == nil {
@@ -36,13 +47,16 @@ socratic: false
 
 		fmt.Println("Created .cicd-gate.yaml")
 		fmt.Println("Edit this file to configure which policies to run and severity levels.")
+		fmt.Println()
+		fmt.Println("IMPORTANT: This tool monitors compliance posture.")
+		fmt.Println("It does NOT certify compliance. See the disclaimer in .cicd-gate.yaml.")
 		return nil
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(initCmd)
-	
+
 	// Ensure viper looks for .cicd-gate.yaml
 	viper.SetConfigName(".cicd-gate")
 	viper.SetConfigType("yaml")
