@@ -110,6 +110,7 @@ Each violation includes:
 
 		socratic, _ := cmd.Flags().GetBool("socratic")
 		policyPath, _ := cmd.Flags().GetString("policy")
+		pack, _ := cmd.Flags().GetString("pack")
 
 		conftestArgs := []string{"test", target}
 		if policyPath != "" {
@@ -123,12 +124,17 @@ Each violation includes:
 			c.Stdout = &stdout
 			c.Stderr = &stderr
 
-			fmt.Print(legalHeader)
+			// Print pack-specific header
+			if pack == "essential-eight" {
+				fmt.Print(colorBold + "Essential Eight Compliance Posture — Machine-Verified (L1)" + colorReset + "\n\n")
+			} else {
+				fmt.Print(legalHeader)
+			}
 
 			err := c.Run()
 
 			if stdout.Len() > 0 {
-				formatSocraticOutput(stdout.String())
+				formatSocraticOutput(stdout.String(), pack)
 			}
 			if stderr.Len() > 0 {
 				fmt.Print(colorDim)
@@ -160,20 +166,28 @@ Each violation includes:
 }
 
 // formatSocraticOutput parses conftest output and renders it with colours,
-// framework IDs, tier labels, and remediation hints
-func formatSocraticOutput(output string) {
+// framework IDs, tier labels, and remediation hints.
+// If pack is set (e.g. "essential-eight"), only violations matching that pack are shown.
+func formatSocraticOutput(output string, pack string) {
 	scanner := bufio.NewScanner(strings.NewReader(output))
-	var failCount, passCount, warnCount int
+	var failCount, passCount, warnCount, skipCount int
 
 	for scanner.Scan() {
 		line := ansiRe.ReplaceAllString(scanner.Text(), "")
 
 		// Try to match a conftest failure line
 		if matches := failLineRe.FindStringSubmatch(line); len(matches) > 0 {
-			failCount++
 			msg := matches[4]
 			file := matches[2]
 			ruleID := extractRuleID(msg)
+
+			// Skip if pack filter is active and this violation isn't in the pack
+			if pack == "essential-eight" && !strings.Contains(msg, "[E8:") {
+				skipCount++
+				continue
+			}
+
+			failCount++
 
 			// Extract framework and tier info
 			frameworks := extractFrameworks(msg)
@@ -299,4 +313,5 @@ func init() {
 	rootCmd.AddCommand(scanCmd)
 	scanCmd.Flags().BoolP("socratic", "s", false, "Verbose output with colours, framework IDs, tier labels, and remediation hints")
 	scanCmd.Flags().StringP("policy", "p", "", "Path to policy directory (default: ./policies)")
+	scanCmd.Flags().StringP("pack", "", "", "Compliance pack filter (e.g. essential-eight)")
 }
