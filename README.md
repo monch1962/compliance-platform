@@ -19,6 +19,8 @@ It wraps [conftest](https://github.com/open-policy-agent/conftest) and [OPA/Rego
 > **Verification tiers:** L1 (Machine-Verified) • L2 (Evidence-Assisted) • L3 (Process-Mapped) • L4 (Advisory)  
 > **Currently shipped:** L1 — E8 + ISM TOP 35
 
+![cicd-gate demo output](docs/cicd-gate-demo.png)
+
 ---
 
 ## Legal Disclaimer

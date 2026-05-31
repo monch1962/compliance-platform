@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background: #1e1e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 40px;
+  }
+  .terminal {
+    background: #11111b;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    max-width: 820px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #313244;
+  }
+  .terminal-header {
+    background: #181825;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #313244;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #f38ba8; }
+  .dot-yellow { background: #f9e2af; }
+  .dot-green { background: #a6e3a1; }
+  .terminal-title {
+    color: #6c7086;
+    font-size: 13px;
+    margin-left: 12px;
+    font-family: -apple-system, sans-serif;
+  }
+  .terminal-body {
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cdd6f4;
+  }
+  .prompt {
+    color: #89b4fa;
+    font-weight: bold;
+  }
+  .cmd {
+    color: #cdd6f4;
+  }
+  .header-text {
+    color: #cdd6f4;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .header-meta {
+    color: #585b70;
+    font-size: 12px;
+  }
+  .warn {
+    color: #f9e2af;
+  }
+  .legal {
+    color: #585b70;
+    font-size: 12px;
+    font-style: italic;
+  }
+  .fail-icon {
+    color: #f38ba8;
+    font-weight: bold;
+  }
+  .label {
+    color: #6c7086;
+    font-size: 12px;
+  }
+  .value {
+    color: #cdd6f4;
+  }
+  .framework {
+    color: #89b4fa;
+  }
+  .tier {
+    color: #a6e3a1;
+  }
+  .fix {
+    color: #f5c2e7;
+  }
+  .divider {
+    color: #585b70;
+  }
+  .summary-label {
+    color: #cdd6f4;
+    font-weight: bold;
+  }
+  .summary-fail {
+    color: #f38ba8;
+    font-weight: bold;
+  }
+  .summary-pass {
+    color: #a6e3a1;
+    font-weight: bold;
+  }
+  .indent { padding-left: 28px; }
+  .indent2 { padding-left: 56px; }
+  .mt1 { margin-top: 4px; }
+  .mb1 { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="terminal-header">
+    <div class="dot dot-red"></div>
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-green"></div>
+    <span class="terminal-title">cicd-gate — compliance-platform</span>
+  </div>
+  <div class="terminal-body">
+    <div><span class="prompt">$ </span><span class="cmd">cicd-gate scan ./infra --socratic</span></div>
+    <br>
+
+    <div class="header-text">CI/CD Gate — Compliance Posture Monitor</div>
+    <div class="header-meta">Frameworks: ISM | E8 | SOCI</div>
+    <div class="header-meta">Tier: L1 (Machine-Verified) | L2 (Evidence-Assisted) | L3 (Process-Mapped) | L4 (Advisory)</div>
+    <br>
+    <div class="warn">IMPORTANT:</div>
+    <div class="legal">This tool monitors compliance posture. It does NOT certify compliance.</div>
+    <br>
+
+    <div><span class="fail-icon">✖</span> <span class="value"><b>K8S-SEC-001</b></span></div>
+    <div class="indent"><span class="label">Description:</span> <span class="value">Container "app" runs privileged</span></div>
+    <div class="indent"><span class="label">File:</span>        <span class="value">infra/k8s/deployment.yaml:42</span></div>
+    <div class="indent"><span class="label">Frameworks:</span>  <span class="framework">[ISM-1172], E8: Restrict Admin Privileges (ML2)</span></div>
+    <div class="indent"><span class="label">Tier:</span>        <span class="tier">L1 (Machine-Verified)</span></div>
+    <div class="indent"><span class="label">Fix:</span>         <span class="fix">Set securityContext.privileged: false</span></div>
+    <br>
+
+    <div><span class="fail-icon">✖</span> <span class="value"><b>K8S-SEC-003</b></span></div>
+    <div class="indent"><span class="label">Description:</span> <span class="value">Container "app" does not set runAsNonRoot: true</span></div>
+    <div class="indent"><span class="label">File:</span>        <span class="value">infra/k8s/deployment.yaml:44</span></div>
+    <div class="indent"><span class="label">Frameworks:</span>  <span class="framework">[ISM-1172], E8: Restrict Admin Privileges (ML2)</span></div>
+    <div class="indent"><span class="label">Tier:</span>        <span class="tier">L1 (Machine-Verified)</span></div>
+    <div class="indent"><span class="label">Fix:</span>         <span class="fix">Set securityContext.runAsNonRoot: true</span></div>
+    <br>
+
+    <div><span class="fail-icon">✖</span> <span class="value"><b>K8S-SEC-005</b></span></div>
+    <div class="indent"><span class="label">Description:</span> <span class="value">Pod uses hostNetwork — only for infrastructure daemons</span></div>
+    <div class="indent"><span class="label">File:</span>        <span class="value">infra/k8s/deployment.yaml:48</span></div>
+    <div class="indent"><span class="label">Frameworks:</span>  <span class="framework">[ISM-1408], E8: Restrict Admin Privileges (ML1)</span></div>
+    <div class="indent"><span class="label">Tier:</span>        <span class="tier">L1 (Machine-Verified)</span></div>
+    <div class="indent"><span class="label">Fix:</span>         <span class="fix">Remove hostNetwork: true unless host network access is required</span></div>
+    <br>
+
+    <div><span class="fail-icon">✖</span> <span class="value"><b>K8S-NET-001</b></span></div>
+    <div class="indent"><span class="label">Description:</span> <span class="value">Ingress has no TLS configured</span></div>
+    <div class="indent"><span class="label">File:</span>        <span class="value">infra/k8s/ingress.yaml:12</span></div>
+    <div class="indent"><span class="label">Frameworks:</span>  <span class="framework">[ISM-1603], E8: Multi-factor Auth (ML1)</span></div>
+    <div class="indent"><span class="label">Tier:</span>        <span class="tier">L1 (Machine-Verified)</span></div>
+    <div class="indent"><span class="label">Fix:</span>         <span class="fix">Configure TLS in the Ingress spec under spec.tls</span></div>
+    <br>
+
+    <div><span class="fail-icon">✖</span> <span class="value"><b>DKR-001</b></span></div>
+    <div class="indent"><span class="label">Description:</span> <span class="value">:latest tag found at nginx:latest</span></div>
+    <div class="indent"><span class="label">File:</span>        <span class="value">infra/docker/Dockerfile:12</span></div>
+    <div class="indent"><span class="label">Frameworks:</span>  <span class="framework">[ISM-1603], E8: Patch Applications (ML2)</span></div>
+    <div class="indent"><span class="label">Tier:</span>        <span class="tier">L1 (Machine-Verified)</span></div>
+    <div class="indent"><span class="label">Fix:</span>         <span class="fix">Replace :latest tag with a pinned digest (@sha256:...)</span></div>
+    <br>
+
+    <div><span class="divider">═══════════════════════════════════════════</span></div>
+    <div><span class="summary-label">Summary:</span></div>
+    <div class="indent"><span class="summary-fail">Failed:</span>  5</div>
+    <div class="indent"><span class="summary-pass">Passed:</span>  28</div>
+    <div class="indent"><span class="summary-label">Total:</span>   33</div>
+    <br>
+
+    <div class="divider">---</div>
+    <div class="warn">Legal:</div>
+    <div class="legal">Compliance posture monitoring — not a certification.</div>
+    <div class="legal">Consult a qualified assessor for formal audit or certification.</div>
+  </div>
+</div>
+</body>
+</html>

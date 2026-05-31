@@ -1,6 +1,8 @@
 # I Built an Open-Source Compliance Gate for Kubernetes — It Checks Against Australian ISM and Essential Eight Standards
 
-**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `pip install cicd-gate` • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest`
+**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest` • GitHub Action: `monch1962/compliance-platform@v0.2.0`
+
+![cicd-gate demo output](docs/cicd-gate-demo.png)
 
 ---
 
@@ -14,9 +16,11 @@ I got tired of doing this manually. So I built a compliance gate that runs in yo
 
 ```
 ✖ K8S-SEC-001: Container "app" runs privileged
-   Frameworks: ISM-1172, E8: Restrict Admin Privileges (ML2)
-   Tier: L1 (Machine-Verified)
-   Fix: set securityContext.privileged: false
+   Description: Container nginx runs privileged
+   File:        infra/k8s/deployment.yaml:42
+   Frameworks:  [ISM-1172], E8: Restrict Admin Privileges (ML2)
+   Tier:        L1 (Machine-Verified)
+   Fix:         Set securityContext.privileged: false in the container spec
 ```
 
 No other open-source tool maps Rego policies to Australian compliance frameworks. This one does.
@@ -36,7 +40,7 @@ No other open-source tool maps Rego policies to Australian compliance frameworks
 | Docker image tags | 1 | ISM-1603 | Patch Applications (ML2) |
 | Hardcoded credentials | 2 | ISM-1172 | — |
 
-**33 Rego rules, verified by conftest, tested against 4 QA matrix combinations.**
+**33 Rego rules, verified by conftest, tested against 4 QA matrix combinations. CI pipeline green.**
 
 ## Why Australian Standards?
 
@@ -59,15 +63,16 @@ Not every control can be automated. I've categorised every rule into one of four
 
 ## Quick Start
 
+Add to `.github/workflows/compliance.yml`:
+
 ```yaml
-# .github/workflows/compliance.yml
 on: [pull_request]
 jobs:
   compliance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monch1962/compliance-platform@v1
+      - uses: monch1962/compliance-platform@v0.2.0
 ```
 
 Or from the CLI:
@@ -75,6 +80,8 @@ Or from the CLI:
 ```bash
 cicd-gate scan . --socratic
 ```
+
+Requires [conftest](https://github.com/open-policy-agent/conftest) to be installed.
 
 ## What's Next
 
@@ -93,4 +100,4 @@ If you're an Australian telco, financial services organisation, or Commonwealth 
 
 ---
 
-*Disclaimer: This tool monitors compliance posture. It does NOT certify compliance.*
+*Disclaimer: This tool monitors compliance posture. It does NOT certify compliance. Apache 2.0 license.*
