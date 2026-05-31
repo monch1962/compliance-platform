@@ -62,11 +62,15 @@ It does NOT provide:
 ## Quick Start
 
 ```bash
-# Install via Go (requires Go 1.21+)
-go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest
-
-# Or install via pip (Python wrapper — downloads the Go binary)
+# Install via pip (downloads Go binary for your platform)
 pip install cicd-gate
+
+# Or install via Homebrew (macOS/Linux)
+brew tap monch1962/tap
+brew install cicd-gate
+
+# Or install via Go (requires Go 1.21+)
+go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest
 
 # Verify it works
 cicd-gate version
@@ -100,12 +104,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monch1962/compliance-platform@v1
+      - uses: monch1962/compliance-platform@v0.3.1
 ```
 
 ## Policies
 
-### Currently Shipped (Phase 1 — L1 Machine-Verified)
+### Currently Shipped (L1 Machine-Verified)
 
 | Policy | ID | Rules | Frameworks | Tier |
 |---|---|---|---|---|
@@ -123,11 +127,7 @@ jobs:
 
 ### Roadmap
 
-| Phase | Frameworks | Tiers | Target |
-|---|---|---|---|
-| Phase 2 | Full ISM + SOCI technical | L1+L2 | Week 12 |
-| Phase 3 | CPS 234 + TSSR | L2+L3+L4 | Week 18 |
-| Phase 4 | PSPF + APPs (Privacy Act) | L3+L4 | Week 24 |
+L2-L4 controls (full ISM, SOCI, CPS 234, TSSR, PSPF, APPs) are in development.
 
 ## Output Format
 

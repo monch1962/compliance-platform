@@ -59,7 +59,7 @@ Not every control can be automated. I've categorised every rule into one of four
 | **L3** | Process-Mapped | Policy and procedure probes. Template-based. |
 | **L4** | Advisory | Principles-based guidance and attestation. |
 
-**Phase 1 ships L1 only** — the controls that can be fully automated in CI. L2-L4 are in development for ISM, SOCI, CPS 234 (financial services), TSSR (telco), PSPF (government), and APPs (privacy).
+L2-L4 controls are in development for ISM, SOCI, CPS 234 (financial services), TSSR (telco), PSPF (government), and APPs (privacy).
 
 ## Quick Start
 
@@ -85,14 +85,7 @@ Requires [conftest](https://github.com/open-policy-agent/conftest) to be install
 
 ## What's Next
 
-I'm building out a 7-framework roadmap over the next 24 weeks:
-
-| Phase | Frameworks | When |
-|---|---|---|
-| L1 Machine-Verified | E8 + ISM TOP 35 | Now |
-| Full ISM + SOCI | 1,400+ ISM controls, SOCI technical | Weeks 7-12 |
-| CPS 234 + TSSR | Financial services + telco | Weeks 13-18 |
-| PSPF + APPs | Government + Privacy Act | Weeks 19-24 |
+I'm expanding framework coverage to include full ISM, SOCI, CPS 234, TSSR, PSPF, and APPs.
 
 If you're an Australian telco, financial services organisation, or Commonwealth entity, I'd love your input on which controls matter most.
 
