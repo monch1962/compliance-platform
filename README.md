@@ -64,15 +64,17 @@ It does NOT provide:
 ## Quick Start
 
 ```bash
-# Install via pip (downloads Go binary for your platform)
-pip install cicd-gate
-
-# Or install via Homebrew (macOS/Linux)
+# Install via Homebrew (macOS/Linux)
 brew tap monch1962/tap
 brew install cicd-gate
 
 # Or install via Go (requires Go 1.21+)
 go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest
+
+# Or download from GitHub Releases
+# https://github.com/monch1962/compliance-platform/releases
+
+# pip package coming soon (locked out of PyPI, will publish when access restored)
 
 # Verify it works
 cicd-gate version
