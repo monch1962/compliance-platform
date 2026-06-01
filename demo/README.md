@@ -10,6 +10,7 @@ for testing the CI/CD Gate CLI.
 | `terraform/aws/` | Terraform for AWS | Hardcoded AWS keys, password vars without `sensitive`, open SSH (0.0.0.0/0) |
 | `docker/` | Dockerfile + compose | `latest` tag, no digest pin, no tag |
 | `k8s/` | Kubernetes manifests | `latest` tag, no resource limits, privileged container, hostNetwork |
+| `k8s/namespaces.yaml` | Multi-resource K8s | Missing PSS labels, unverified registry, PVC without backup annotations |
 | `k8s-compliant/` | Compliant K8s manifest | No violations expected |
 
 ## Running the Scanner

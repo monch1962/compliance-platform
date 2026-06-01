@@ -17,7 +17,7 @@ It wraps [conftest](https://github.com/open-policy-agent/conftest) and [OPA/Rego
 
 > **Supported frameworks:** ISM (Information Security Manual) • Essential Eight • SOCI Act  
 > **Verification tiers:** L1 (Machine-Verified) • L2 (Evidence-Assisted) • L3 (Process-Mapped) • L4 (Advisory)  
-> **Currently shipped:** L1 — E8 + ISM TOP 35
+> **Currently shipped:** L1 — E8 + ISM E8 ML1 baseline (55 rules, 13 policy files)
 
 ![cicd-gate demo output](docs/cicd-gate-demo.png)
 
@@ -113,17 +113,21 @@ jobs:
 
 | Policy | ID | Rules | Frameworks | Tier |
 |---|---|---|---|---|
-| K8s Security | K8S-SEC-* | 12 | ISM-1172, ISM-1408, ISM-0290, ISM-1403, ISM-1603, E8 #2, #6 | L1 |
-| K8s IAM | K8S-IAM-* | 9 | ISM-1172, ISM-0290, ISM-1403, E8 #6 | L1-L2 |
-| K8s Network | K8S-NET-* | 5 | ISM-1603, ISM-1408, E8 #5 | L1-L2 |
-| K8s Storage | K8S-STO-* | 3 | ISM-1172, ISM-0290, E8 #6 | L1-L2 |
-| K8s App Control | E8-AC-* | 3 | ISM-1172, E8 #1 | L1 |
-| K8s Patch OS | E8-OS-* | 3 | ISM-1603, E8 #7 | L1-L2 |
-| K8s Backup | E8-BK-* | 6 | ISM-1403, E8 #8 | L2 |
-| Docker | DKR-* | 4 | ISM-1603, ISM-1408, E8 #2 | L1-L2 |
-| Secrets | SEC-* | 2 | ISM-1172, E8 #6 | L1 |
+| K8s Security | K8S-SEC-* | 12 | ISM-0445, ISM-1175, ISM-1380, ISM-1688, ISM-1689, E8 #2, #6 | L1 |
+| K8s IAM | K8S-IAM-* | 9 | ISM-0445, ISM-1175, ISM-1883, E8 #6 | L1-L2 |
+| K8s Network | K8S-NET-* | 5 | ISM-1401, ISM-1504, E8 #5 | L1-L2 |
+| K8s Storage | K8S-STO-* | 3 | ISM-0445, E8 #6 | L1-L2 |
+| K8s App Control | E8-AC-* | 3 | ISM-0843, ISM-1657, ISM-1870, E8 #1 | L1 |
+| K8s Patch OS | E8-OS-* | 3 | ISM-1690, ISM-1694, ISM-1877, E8 #7 | L1-L2 |
+| K8s Backup | E8-BK-* | 6 | ISM-1511, ISM-1810, ISM-1811, E8 #8 | L2 |
+| K8s EOL Support | CESS-* | 5 | ISM-1501, ISM-1704, ISM-1905, E8: Cessation of Support | L1 |
+| K8s Vuln Scan | VULN-* | 3 | ISM-1698, ISM-1699, ISM-1876, E8: Scanning | L1-L2 |
+| Docker | DKR-* | 4 | ISM-1690, ISM-1694, E8 #2 | L1-L2 |
+| Secrets | SEC-* | 2 | ISM-0445, ISM-1175, E8 #6 | L1 |
 
-**Total: 50 rules across 5 of 8 Essential Eight strategies (E8 #3, #4 require manual attestation)**
+**Total: 55 rules across 13 policy files — 5 of 8 E8 strategies automated (E8 #3, #4 need manual attestation)**
+
+ISM control IDs sourced from ASD's official OSCAL catalog (March 2026), E8 ML1 baseline profile.
 
 ### Roadmap
 

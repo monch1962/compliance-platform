@@ -1,6 +1,6 @@
 # I Built an Open-Source Compliance Gate for Kubernetes — It Checks Against Australian ISM and Essential Eight Standards
 
-**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest` • GitHub Action: `monch1962/compliance-platform@v0.2.0`
+**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest` • GitHub Action: `monch1962/compliance-platform@v0.3.1`
 
 ![cicd-gate demo output](docs/cicd-gate-demo.png)
 
@@ -12,7 +12,7 @@ I got tired of doing this manually. So I built a compliance gate that runs in yo
 
 ## What It Does
 
-`cicd-gate scan . --socratic` runs 33 policy checks against your Kubernetes and Docker configurations. Each violation shows you:
+`cicd-gate scan . --socratic` runs 55 policy checks against your Kubernetes and Docker configurations. Each violation shows you:
 
 ```
 ✖ K8S-SEC-001: Container "app" runs privileged
@@ -40,7 +40,7 @@ No other open-source tool maps Rego policies to Australian compliance frameworks
 | Docker image tags | 1 | ISM-1603 | Patch Applications (ML2) |
 | Hardcoded credentials | 2 | ISM-1172 | — |
 
-**33 Rego rules, verified by conftest, tested against 4 QA matrix combinations. CI pipeline green.**
+**55 Rego rules across 13 policy files, verified by conftest, tested against 12 QA matrix combinations. CI pipeline green.**
 
 ## Why Australian Standards?
 
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monch1962/compliance-platform@v0.2.0
+      - uses: monch1962/compliance-platform@v0.3.1
 ```
 
 Or from the CLI:

@@ -97,7 +97,9 @@ Recommendation: Manual attestation via L3 evidence collection.
 | `k8s-e8-app-control.rego` | 3 | E8 #1 |
 | `k8s-e8-patch-os.rego` | 3 | E8 #7 |
 | `k8s-e8-backup.rego` | 6 | E8 #8 |
+| `ism-eol-support.rego` | 5 | ISM-1501, ISM-1704, ISM-1905 |
+| `ism-vuln-scan.rego` | 3 | ISM-1698, ISM-1699 |
 | `docker.rego` | 4 | E8 #2 |
 | `secrets.rego` | 2 | E8 #6 |
 | `main.rego` | Aggregation | — |
-| **Total** | **50** | **5 of 8 automated** |
+| **Total** | **55** | **5 of 8 E8 automated** |
