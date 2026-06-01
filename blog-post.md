@@ -89,8 +89,8 @@ I'm expanding framework coverage to include full ISM, SOCI, CPS 234, TSSR, PSPF,
 
 If you're an Australian telco, financial services organisation, or Commonwealth entity, I'd love your input on which controls matter most.
 
-**[Star the repo](https://github.com/monch1962/compliance-platform)** • **Contribute a Rego policy** • **Open an issue**
+**[Star the repo](https://github.com/monch1962/compliance-platform)** • **Contribute a Rego policy** • **Open an issue** • **Hosted API at [RegoHub](https://regohub.com)**
 
 ---
 
-*Disclaimer: This tool monitors compliance posture. It does NOT certify compliance. Apache 2.0 license.*
+*Built by [Civvra](https://civvra.com). This tool monitors compliance posture. It does NOT certify compliance. Apache 2.0 license.*

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegoHub — AU Compliance Policy-as-a-Service</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+        .logo { font-size: 2.5rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.25rem; color: #a1a1aa; margin-bottom: 3rem; }
+        .badge {
+            display: inline-block;
+            background: #1e3a5f;
+            color: #60a5fa;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        h2 { font-size: 1.5rem; color: #fff; margin: 2rem 0 1rem; }
+        p { color: #a1a1aa; margin-bottom: 1rem; }
+        ul { list-style: none; margin: 1rem 0; }
+        li { color: #a1a1aa; padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        li::before { content: "→"; position: absolute; left: 0; color: #60a5fa; }
+        .footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #27272a; font-size: 0.875rem; color: #71717a; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="badge">Coming soon</span>
+        <div class="logo">RegoHub</div>
+        <p class="tagline">AU compliance checking as a service — no install required</p>
+
+        <p>RegoHub is the hosted API that powers <a href="https://github.com/monch1962/compliance-platform">cicd-gate</a>'s compliance checks. Point it at your infrastructure, get back ISM and Essential Eight violation reports — without installing conftest, OPA, or anything locally.</p>
+
+        <h2>What you get</h2>
+        <ul>
+            <li>55+ Rego policies mapped to Australian ISM and Essential Eight controls</li>
+            <li>Continuous compliance monitoring across your IaC</li>
+            <li>Framework-identified violations with tier labels (L1-L4)</li>
+            <li>Audit-ready export reports</li>
+            <li>Multi-cloud compliance packs (AWS, GCP, Azure)</li>
+        </ul>
+
+        <h2>How it works</h2>
+        <p>Connect your infrastructure (CI/CD pipeline, Terraform plan, or cloud account). RegoHub evaluates it against our Rego policy library — the same policies that power the open-source cicd-gate CLI — and returns structured compliance reports with ISM and E8 framework references.</p>
+
+        <h2>Open source foundation</h2>
+        <p>Every RegoHub policy is available in the open-source <a href="https://github.com/monch1962/compliance-platform">compliance-platform</a> repository. The hosted API adds continuous monitoring, team collaboration, audit exports, and enterprise support — built on the same trusted policy engine.</p>
+
+        <div class="footer">
+            <p>Built by <a href="https://civvra.com">Civvra</a>. Apache 2.0 licensed. &copy; 2026.</p>
+        </div>
+    </div>
+</body>
+</html>

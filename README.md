@@ -6,6 +6,8 @@
 
 **CI/CD Gate** checks your infrastructure-as-code against **Australian Essential Eight (E8) and ISM** compliance policies — directly from your CI pipeline.
 
+Built by [Civvra](https://civvra.com). The hosted API is available at [RegoHub](https://regohub.com).
+
 It wraps [conftest](https://github.com/open-policy-agent/conftest) and [OPA/Rego](https://www.openpolicyagent.org/) to provide:
 
 - **Privilege & security controls** — privileged containers, host namespace access, capabilities

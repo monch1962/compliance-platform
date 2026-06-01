@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civvra — Compliance for Australian Cloud Infrastructure</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+        .logo { font-size: 2.5rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.25rem; color: #a1a1aa; margin-bottom: 3rem; }
+        h2 { font-size: 1.5rem; color: #fff; margin: 2rem 0 1rem; }
+        p { color: #a1a1aa; margin-bottom: 1rem; }
+        .product-card {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .product-card h3 { color: #fff; margin-bottom: 0.5rem; }
+        .product-card .domain { font-family: monospace; color: #60a5fa; font-size: 0.9rem; }
+        .footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #27272a; font-size: 0.875rem; color: #71717a; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Civvra</div>
+        <p class="tagline">Compliance for Australian cloud infrastructure</p>
+
+        <h2>Our Mission</h2>
+        <p>Australian organisations dealing with the ISM, Essential Eight, and SOCI Act shouldn't have to choose between spreadsheet-based compliance and expensive enterprise tools built for US markets. Civvra builds compliance tooling that speaks Australian standards — from the ground up.</p>
+
+        <h2>Products</h2>
+
+        <div class="product-card">
+            <h3>RegoHub</h3>
+            <div class="domain">regohub.com</div>
+            <p>Policy-as-a-service API for checking infrastructure against AU compliance frameworks. ISM, Essential Eight, and SOCI Act controls — automated, continuous, audit-ready.</p>
+        </div>
+
+        <div class="product-card">
+            <h3>cicd-gate</h3>
+            <div class="domain">Open source · <a href="https://github.com/monch1962/compliance-platform">GitHub</a></div>
+            <p>Free CLI and GitHub Action that checks Kubernetes, Docker, and IaC against ISM and E8 policies directly from your CI pipeline.</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Civvra. Open-source Apache 2.0. Not a substitute for formal compliance audit.</p>
+        </div>
+    </div>
+</body>
+</html>
