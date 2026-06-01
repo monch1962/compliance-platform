@@ -1,6 +1,6 @@
 name: 'Compliance Gate'
 description: 'Check IaC against Australian ISM and Essential Eight compliance policies'
-author: 'Compliance Platform Team'
+author: 'Civvra (civvra.com)'
 
 branding:
   icon: 'shield'
