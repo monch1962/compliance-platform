@@ -208,9 +208,18 @@ func loadISMCache(path string) *ismCacheEntry {
 
 func saveISMCache(path string, entry *ismCacheEntry) {
 	dir := filepath.Dir(path)
-	os.MkdirAll(dir, 0755)
-	data, _ := json.MarshalIndent(entry, "", "  ")
-	os.WriteFile(path, data, 0644)
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: failed to create cache directory: %v\n", err)
+		return
+	}
+	data, err := json.MarshalIndent(entry, "", "  ")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: failed to serialize cache: %v\n", err)
+		return
+	}
+	if err := os.WriteFile(path, data, 0644); err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: failed to write cache: %v\n", err)
+	}
 }
 
 func compareISMCatalogs(old, new *ismCacheEntry) []ismChange {
