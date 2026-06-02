@@ -127,6 +127,9 @@ Each violation includes:
 			// Print pack-specific header
 			if pack == "essential-eight" {
 				fmt.Print(colorBold + "Essential Eight Compliance Posture — Machine-Verified (L1)" + colorReset + "\n\n")
+			} else if pack == "ism-baseline" {
+				fmt.Print(colorBold + "ISM E8 ML1 Baseline — Compliance Posture" + colorReset + "\n")
+				fmt.Print(colorDim + "46 controls from ASD ISM March 2026 catalog" + colorReset + "\n\n")
 			} else {
 				fmt.Print(legalHeader)
 			}
@@ -183,6 +186,10 @@ func formatSocraticOutput(output string, pack string) {
 
 			// Skip if pack filter is active and this violation isn't in the pack
 			if pack == "essential-eight" && !strings.Contains(msg, "[E8:") {
+				skipCount++
+				continue
+			}
+			if pack == "ism-baseline" && !strings.Contains(msg, "[ISM-") {
 				skipCount++
 				continue
 			}
