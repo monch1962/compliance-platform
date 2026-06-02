@@ -1,6 +1,6 @@
 # I Built an Open-Source Compliance Gate for Kubernetes — It Checks Against Australian ISM and Essential Eight Standards
 
-**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest` • GitHub Action: `monch1962/compliance-platform@v0.3.1`
+**TL;DR:** `cicd-gate` is a CLI and GitHub Action that checks your Kubernetes manifests, Docker configs, and IaC against **Australian ISM and Essential Eight** compliance policies. Every violation has framework IDs, tier labels (L1-L4), and remediation hints. [GitHub](https://github.com/monch1962/compliance-platform) • `go install github.com/monch1962/compliance-platform/packages/cicd-gate@latest` • GitHub Action: `monch1962/compliance-platform@v0.3.3`
 
 ![cicd-gate demo output](docs/cicd-gate-demo.png)
 
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monch1962/compliance-platform@v0.3.1
+      - uses: monch1962/compliance-platform@v0.3.3
 ```
 
 Or from the CLI:

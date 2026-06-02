@@ -92,6 +92,13 @@ cicd-gate scan .
 # Scan with verbose remediation hints (framework IDs, tier labels, remediation)
 cicd-gate scan . --socratic
 
+# Scan with compliance pack filter (only show E8 or ISM controls)
+cicd-gate scan . --socratic --pack essential-eight
+cicd-gate scan . --socratic --pack ism-baseline
+
+# Check ASD ISM catalog for changes since last check
+cicd-gate ism-diff
+
 # Scan a specific directory with custom policies
 cicd-gate scan ./infra --policy ./custom-policies
 ```
@@ -108,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: monch1962/compliance-platform@v0.3.1
+      - uses: monch1962/compliance-platform@v0.3.3
 ```
 
 ## Policies
